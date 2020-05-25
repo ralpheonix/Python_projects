@@ -1,0 +1,53 @@
+
+def halves1(no):
+    return int(no[0:int(m)])
+
+def halves2(no):
+    return int(no[int(m):])
+
+def rec_mul(x, y):
+    if x < y:
+        return rec_mul(y, x)
+    if y == 0:
+        return 0
+    else:
+        return x + rec_mul(x, y-1)
+        
+
+
+a = int(input("enter the first number : "))
+b = int(input("enter the second number : "))
+
+
+if a < 10 and b < 10:
+    result = a*b
+
+else:
+    a = str(a)
+    b = str(b)
+    n1 = len(a)
+    n2 = len(b)
+    n = max(n1,n2)
+
+    if n1 % 2 != 0 or n2 % 2 != 0:
+        n += 1
+        a = a.zfill(n)
+        b = b.zfill(n)
+
+    m = int(n)/2
+
+    w = halves1(a)
+    x = halves2(a)
+    y = halves1(b)
+    z = halves2(b)
+
+    w_y = rec_mul(w, y)
+    x_z = rec_mul(x, z)
+
+    w_x__y_z = rec_mul((w+x), (y+z) )
+    res = w_x__y_z - w_y - x_z
+
+    result = ((10 ** (m*2)) * w_y) + ((10 ** m)*(res)) + x_z
+
+print(result)
+
